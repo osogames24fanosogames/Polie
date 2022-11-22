@@ -12,13 +12,10 @@ var timer = false
 var paused = false
 
 # Declare member variables here. Examples:
-onready var animate = get_node("AnimatedSprite")
-onready var safeFrames = get_node("safeFrames")
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animate.animation = "idle"
+	$AS.animation = "idle"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,29 +32,31 @@ func _physics_process(delta):
 	if !jumped && !is_on_floor():
 		if !timer:
 			timer = true
-			safeFrames.start()
+			$safeFrames.start()
 		else:
-			if !safeFrames.time_left > 0:
+			if !$safeFrames.time_left > 0:
 				jumped = true
 	if Input.is_action_pressed("jump") && !jumped:
 		jumped = true
 		velocity.y = -JUMPSPEED
-		animate.animation = "jumpstart"
-		animate.frame = 0
-	animate.flip_h = velocity.x < 0
+		$AS.animation = "jumpstart"
+		$AS.frame = 0
+	$AS.flip_h = velocity.x < 0
 	if !jumped:
 		if velocity.x != 0:
-			animate.animation = "run"
+			$AS.animation = "run"
 		else:
-			animate.animation = "idle"
+			$AS.animation = "idle"
 	if Input.is_action_just_pressed("pause"):
 		paused = !paused
+		if paused:
+			$Camera2D/pause/AnimationPlayer.play("load")
 	if !paused:
 		move_and_slide(velocity, FLOOR)
-	get_node("Camera2D/pause").visible = paused
-	animate.playing = !paused
+	$Camera2D/pause.visible = paused
+	$AS.playing = !paused
 
 
 func _on_AnimatedSprite_animation_finished():
-	if animate.animation == "jumpstart":
-		animate.animation = "jumploop"
+	if $AS.animation == "jumpstart":
+		$AS.animation = "jumploop"
