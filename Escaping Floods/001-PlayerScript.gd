@@ -45,7 +45,10 @@ func _physics_process(delta):
 		velocity.y = -JUMPSPEED
 		$AS.animation = "jumpstart"
 		$AS.frame = 0
-	$AS.flip_h = velocity.x < 0
+	if velocity.x == 0:
+		pass
+	else:
+		$AS.flip_h = velocity.x < 0
 	if !jumped:
 		if velocity.x != 0:
 			$AS.animation = "run"
@@ -60,7 +63,8 @@ func _physics_process(delta):
 		move_and_slide(velocity, FLOOR)
 	if dead:
 		if Input.is_action_just_pressed("ui_accept") && deadConfirmable:
-			$Camera2D/dead/AnimationPlayer.play()
+			$Camera2D/dead/AnimationPlayer.play("end")
+			deadConfirmable = false
 	$Camera2D/pause.visible = paused
 	$AS.playing = !paused
 	$Camera2D/dead.visible = dead
@@ -83,3 +87,9 @@ func _on_death_area_entered(area):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "deadStart":
 		deadConfirmable = true
+	if anim_name == "end":
+		dead = false
+		var node = get_node_or_null("spawn")
+		position = node.position
+		emit_signal("dead", dead)
+		velocity = Vector2.ZERO

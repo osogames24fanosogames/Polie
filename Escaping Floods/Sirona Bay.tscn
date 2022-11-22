@@ -238,7 +238,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 170.5, 83.5 )
+extents = Vector2( 758, 83.5 )
 
 [node name="Sirona Bay" type="Node"]
 
@@ -387,7 +387,7 @@ color = Color( 0, 0.301961, 0.643137, 1 )
 position = Vector2( 169, -8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/ParallaxLayer/ColorRect/Area2D"]
-position = Vector2( -1, 91.5 )
+position = Vector2( -91, 91.5 )
 shape = SubResource( 15 )
 
 [node name="main" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
@@ -397,6 +397,10 @@ frame = 1
 playing = true
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 8 )
+
+[node name="spawn" type="Position2D" parent="KinematicBody2D"]
+position = Vector2( 0, 8 )
 
 [connection signal="dead" from="KinematicBody2D" to="ParallaxBackground" method="_on_KinematicBody2D_dead"]
 [connection signal="pause" from="KinematicBody2D" to="ParallaxBackground" method="_on_KinematicBody2D_pause"]
