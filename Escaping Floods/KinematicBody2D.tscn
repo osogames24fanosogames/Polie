@@ -133,7 +133,7 @@ script = ExtResource( 2 )
 [node name="AS" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "run"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -149,6 +149,7 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 
 [node name="pause" type="Control" parent="Camera2D"]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -191,10 +192,6 @@ anims/load = SubResource( 20 )
 
 [node name="safeFrames" type="Timer" parent="."]
 wait_time = 0.107
-one_shot = true
-
-[node name="remember" type="Timer" parent="."]
-wait_time = 0.15
 one_shot = true
 
 [node name="detector" type="RayCast2D" parent="."]

@@ -23,7 +23,6 @@ func _physics_process(delta):
 	if !paused:
 		velocity.y += GRAVITY
 		velocity.x = (int(Input.is_action_pressed("left")) * -speed) + (int(Input.is_action_pressed("right")) * speed)
-		print(int($detector.is_colliding()))
 		if $detector.is_colliding():
 			velocity.y -= velocity.y * 2
 	if is_on_floor():
