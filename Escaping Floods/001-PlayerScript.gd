@@ -5,11 +5,16 @@ const JUMPSPEED = 235
 const FLOOR = Vector2(0, -1)
 const SAFE = 0.2
 
+signal dead
+signal pause
+
 var velocity = Vector2.ZERO
 var speed = 100;
 var jumped = false
 var timer = false
 var paused = false
+var dead = false
+var deadConfirmable = false
 
 # Declare member variables here. Examples:
 
@@ -20,7 +25,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if !paused:
+	if !paused && !dead:
 		velocity.y += GRAVITY
 		velocity.x = (int(Input.is_action_pressed("left")) * -speed) + (int(Input.is_action_pressed("right")) * speed)
 		if $detector.is_colliding():
@@ -46,16 +51,35 @@ func _physics_process(delta):
 			$AS.animation = "run"
 		else:
 			$AS.animation = "idle"
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") && !dead:
 		paused = !paused
+		emit_signal("pause", paused)
 		if paused:
 			$Camera2D/pause/AnimationPlayer.play("load")
-	if !paused:
+	if !paused && !dead:
 		move_and_slide(velocity, FLOOR)
+	if dead:
+		if Input.is_action_just_pressed("ui_accept") && deadConfirmable:
+			$Camera2D/dead/AnimationPlayer.play()
 	$Camera2D/pause.visible = paused
 	$AS.playing = !paused
+	$Camera2D/dead.visible = dead
 
 
 func _on_AnimatedSprite_animation_finished():
 	if $AS.animation == "jumpstart":
 		$AS.animation = "jumploop"
+
+func death():
+	dead = true
+	deadConfirmable = false
+	$Camera2D/dead/AnimationPlayer.play("deadStart")
+	emit_signal("dead", dead)
+
+func _on_death_area_entered(area):
+	if area.is_in_group("inst"):
+		death()
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "deadStart":
+		deadConfirmable = true

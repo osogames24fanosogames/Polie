@@ -1,10 +1,12 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://polie_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://001-PlayerScript.gd" type="Script" id=2]
 [ext_resource path="res://8_bit_arcade/8-bit Arcade Out.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://8_bit_arcade/8-bit Arcade In.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://pause.png" type="Texture" id=5]
+[ext_resource path="res://deadPolie.png" type="Texture" id=6]
+[ext_resource path="res://death.png" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -126,14 +128,258 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Info:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.233259, 1 ),
+"update": 0,
+"values": [ Vector2( 4, -55 ), Vector2( 4, -5 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=30]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": false,
+"name": "idle",
+"speed": 12.0
+} ]
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 6 )
+region = Rect2( 160, 0, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 6 )
+region = Rect2( 160, 0, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 0, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 192, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 6 )
+region = Rect2( 160, 192, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 192, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 384, 160, 192 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 6 )
+region = Rect2( 160, 384, 160, 192 )
+
+[sub_resource type="SpriteFrames" id=40]
+animations = [ {
+"frames": [ SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 32 ), SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "up",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=41]
+resource_name = "deadStart"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("dead:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("dead:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Info2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("dead:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("bg:modulate")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1e-05, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Info2:text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "TRY AGAIN" ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("dead22:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("dead22:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.7, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "end"
+tracks/0/type = "value"
+tracks/0/path = NodePath("dead:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Info2:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1e-05 ),
+"update": 1,
+"values": [ "OFF YOU GO" ]
+}
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+z_index = 120
+z_as_relative = false
 script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "--FUNCTIONS FOR LEVEL DESIGN--
+- putting any object with the \"dmg\" group will make the player take damage upon contact
+- putting any object with the \"inst\" group will make it act like a death plane"
+}
 
 [node name="AS" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "run"
-frame = 1
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -141,6 +387,8 @@ position = Vector2( 0, 9 )
 shape = SubResource( 18 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+z_index = 120
+z_as_relative = false
 current = true
 zoom = Vector2( 0.3, 0.3 )
 drag_margin_left = 0.0
@@ -163,7 +411,7 @@ __meta__ = {
 }
 
 [node name="bg" type="Panel" parent="Camera2D/pause"]
-modulate = Color( 0, 0, 0, 0.372549 )
+modulate = Color( 0.466667, 0.74902, 1, 1 )
 margin_left = -243.0
 margin_top = -142.0
 margin_right = 554.0
@@ -190,6 +438,61 @@ texture = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/pause"]
 anims/load = SubResource( 20 )
 
+[node name="dead" type="Control" parent="Camera2D"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -154.0
+margin_top = -90.0
+margin_right = 154.0
+margin_bottom = 90.0
+__meta__ = {
+"_editor_description_": "pause menu"
+}
+
+[node name="bg" type="Panel" parent="Camera2D/dead"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -243.0
+margin_top = -142.0
+margin_right = 554.0
+margin_bottom = 349.0
+
+[node name="dead" type="AnimatedSprite" parent="Camera2D/dead"]
+visible = false
+position = Vector2( 154, 97 )
+frames = SubResource( 30 )
+animation = "idle"
+frame = 8
+playing = true
+
+[node name="dead22" type="AnimatedSprite" parent="Camera2D/dead"]
+position = Vector2( 154, 97 )
+frames = SubResource( 40 )
+animation = "idle"
+frame = 1
+playing = true
+offset = Vector2( 0, -20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/dead"]
+anims/deadStart = SubResource( 41 )
+anims/end = SubResource( 42 )
+
+[node name="Info2" type="Label" parent="Camera2D/dead"]
+margin_left = 89.0
+margin_top = -5.0
+margin_right = 219.0
+margin_bottom = 17.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 19 )
+text = "TRY AGAIN"
+align = 1
+uppercase = true
+
 [node name="safeFrames" type="Timer" parent="."]
 wait_time = 0.107
 one_shot = true
@@ -198,4 +501,12 @@ one_shot = true
 enabled = true
 cast_to = Vector2( 0, -7 )
 
+[node name="death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="death"]
+position = Vector2( 0, 9 )
+shape = SubResource( 18 )
+
 [connection signal="animation_finished" from="AS" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="animation_finished" from="Camera2D/dead/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="death" to="." method="_on_death_area_entered"]
