@@ -2,4 +2,3 @@
 
 ## What's new?
 - The project
-- nothing else
