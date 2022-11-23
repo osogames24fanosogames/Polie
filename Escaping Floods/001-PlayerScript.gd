@@ -45,6 +45,7 @@ func _physics_process(delta):
 		velocity.y = -JUMPSPEED
 		$AS.animation = "jumpstart"
 		$AS.frame = 0
+		$jump.play()
 	if velocity.x == 0:
 		pass
 	else:
@@ -56,8 +57,10 @@ func _physics_process(delta):
 			$AS.animation = "idle"
 	if Input.is_action_just_pressed("pause") && !dead:
 		paused = !paused
+		$pause.play()
 		emit_signal("pause", paused)
 		if paused:
+			$Camera2D/pause/AnimationPlayer.stop()
 			$Camera2D/pause/AnimationPlayer.play("load")
 	if !paused && !dead:
 		move_and_slide(velocity, FLOOR)
@@ -79,8 +82,11 @@ func death():
 	deadConfirmable = false
 	$Camera2D/dead/AnimationPlayer.play("deadStart")
 	emit_signal("dead", dead)
+	$die.play()
 
 func _on_death_area_entered(area):
+	if area.is_in_group("water") && !dead:
+		$splash.play()
 	if area.is_in_group("inst"):
 		death()
 

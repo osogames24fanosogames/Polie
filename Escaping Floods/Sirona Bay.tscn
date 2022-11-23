@@ -258,121 +258,121 @@ motion_scale = Vector2( 0, 1 )
 
 [node name="water2" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 16, 96 )
 
 [node name="water3" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 32, 96 )
 
 [node name="water4" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 48, 96 )
 
 [node name="water5" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 64, 96 )
 
 [node name="water6" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 80, 96 )
 
 [node name="water7" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 96, 96 )
 
 [node name="water8" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 112, 96 )
 
 [node name="water9" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 128, 96 )
 
 [node name="water10" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 144, 96 )
 
 [node name="water11" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 160, 96 )
 
 [node name="water12" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -160, 96 )
 
 [node name="water13" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -144, 96 )
 
 [node name="water14" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -128, 96 )
 
 [node name="water15" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -112, 96 )
 
 [node name="water16" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -96, 96 )
 
 [node name="water17" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -80, 96 )
 
 [node name="water18" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -64, 96 )
 
 [node name="water19" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -48, 96 )
 
 [node name="water20" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -32, 96 )
 
 [node name="water21" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -16, 96 )
 
@@ -383,17 +383,17 @@ margin_right = 168.0
 margin_bottom = 271.0
 color = Color( 0, 0.301961, 0.643137, 1 )
 
-[node name="Area2D" type="Area2D" parent="ParallaxBackground/ParallaxLayer/ColorRect" groups=["inst"]]
+[node name="Area2D" type="Area2D" parent="ParallaxBackground/ParallaxLayer/ColorRect" groups=["inst", "water"]]
 position = Vector2( 169, -8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/ParallaxLayer/ColorRect/Area2D"]
-position = Vector2( -91, 91.5 )
+position = Vector2( -85, 76 )
 shape = SubResource( 15 )
 
 [node name="main" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 0, 96 )
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
