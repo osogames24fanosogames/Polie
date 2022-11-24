@@ -8,10 +8,10 @@ func _ready():
 
 func _on_button_area_entered(area):
 	if area.is_in_group("player") && $AnimatedSprite.animation == "normal":
-		emit_signal("button_pressed", id, true)
+		emit_signal("button_pressed", id)
 		$AnimatedSprite.animation = "press"
 		$audio.play()
 
 func _on_KinematicBody2D_dead(_dead):
 	$AnimatedSprite.animation = "normal"
-	emit_signal("button_pressed", id, false)
+	emit_signal("button_pressed", id)
