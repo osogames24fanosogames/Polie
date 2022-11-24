@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://polie_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://001-PlayerScript.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://sfx/diePlayer.wav" type="AudioStream" id=9]
 [ext_resource path="res://sfx/pause.wav" type="AudioStream" id=10]
 [ext_resource path="res://sfx/watersplash.wav" type="AudioStream" id=11]
+[ext_resource path="res://pause.gd" type="Script" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -98,11 +99,22 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 7, 15 )
 
+[sub_resource type="DynamicFontData" id=43]
+font_path = "res://8_bit_arcade/8-bit Arcade In.ttf"
+
 [sub_resource type="DynamicFont" id=19]
 size = 32
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 43 )
+fallback/0 = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=45]
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=44]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 43 )
 fallback/0 = ExtResource( 3 )
 
 [sub_resource type="Animation" id=20]
@@ -431,7 +443,7 @@ __meta__ = {
 [node name="AS" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "run"
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -449,7 +461,6 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 
 [node name="pause" type="Control" parent="Camera2D"]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -458,16 +469,17 @@ margin_left = -154.0
 margin_top = -90.0
 margin_right = 154.0
 margin_bottom = 90.0
+script = ExtResource( 12 )
 __meta__ = {
 "_editor_description_": "pause menu"
 }
 
 [node name="bg" type="Panel" parent="Camera2D/pause"]
 modulate = Color( 0.466667, 0.74902, 1, 1 )
-margin_left = -243.0
-margin_top = -142.0
-margin_right = 554.0
-margin_bottom = 349.0
+margin_left = -240.0
+margin_top = -137.0
+margin_right = 557.0
+margin_bottom = 354.0
 
 [node name="Info" type="Label" parent="Camera2D/pause"]
 margin_left = 4.0
@@ -480,6 +492,46 @@ custom_constants/line_spacing = 0
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 19 )
 text = "PAUSED"
+uppercase = true
+
+[node name="capa" type="Panel" parent="Camera2D/pause"]
+self_modulate = Color( 0, 0, 0, 0.278431 )
+margin_left = 4.0
+margin_top = 24.0
+margin_right = 90.0
+margin_bottom = 38.0
+
+[node name="capa2" type="Panel" parent="Camera2D/pause"]
+self_modulate = Color( 0, 0, 0, 0.278431 )
+margin_left = 4.0
+margin_top = 40.0
+margin_right = 90.0
+margin_bottom = 172.0
+
+[node name="Settings" type="Control" parent="Camera2D/pause/capa2"]
+margin_left = -4.0
+margin_top = -40.0
+margin_right = 36.0
+
+[node name="animations" type="CheckButton" parent="Camera2D/pause/capa2/Settings"]
+margin_left = 4.0
+margin_top = 40.0
+margin_right = 176.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 45 )
+text = "Animations "
+clip_text = true
+
+[node name="option-tab" type="Label" parent="Camera2D/pause"]
+margin_left = -1.0
+margin_top = 23.0
+margin_right = 95.0
+margin_bottom = 45.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 44 )
+text = "VOLUME"
+align = 1
 uppercase = true
 
 [node name="Sprite" type="Sprite" parent="Camera2D/pause"]
@@ -571,6 +623,7 @@ stream = ExtResource( 10 )
 [node name="splash" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 
+[connection signal="pause" from="." to="Camera2D/pause" method="_on_KinematicBody2D_pause"]
 [connection signal="animation_finished" from="AS" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="animation_finished" from="Camera2D/dead/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="death" to="." method="_on_death_area_entered"]

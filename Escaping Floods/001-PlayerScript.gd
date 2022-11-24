@@ -30,22 +30,22 @@ func _physics_process(delta):
 		velocity.x = (int(Input.is_action_pressed("left")) * -speed) + (int(Input.is_action_pressed("right")) * speed)
 		if $detector.is_colliding():
 			velocity.y -= velocity.y * 2
-	if is_on_floor():
-		jumped = false
-		velocity.y = 0
-	if !jumped && !is_on_floor():
-		if !timer:
-			timer = true
-			$safeFrames.start()
-		else:
-			if !$safeFrames.time_left > 0:
-				jumped = true
-	if Input.is_action_pressed("jump") && !jumped:
-		jumped = true
-		velocity.y = -JUMPSPEED
-		$AS.animation = "jumpstart"
-		$AS.frame = 0
-		$jump.play()
+		if is_on_floor():
+			jumped = false
+			velocity.y = 0
+		if !jumped && !is_on_floor():
+			if !timer:
+				timer = true
+				$safeFrames.start()
+			else:
+				if !$safeFrames.time_left > 0:
+					jumped = true
+		if Input.is_action_pressed("jump") && !jumped:
+			jumped = true
+			velocity.y = -JUMPSPEED
+			$AS.animation = "jumpstart"
+			$AS.frame = 0
+			$jump.play()
 	if velocity.x == 0:
 		pass
 	else:
